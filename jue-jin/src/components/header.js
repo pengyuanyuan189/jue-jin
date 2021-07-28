@@ -1,6 +1,12 @@
 import React from "react";
 import Searchbox from "./basis/searchbox";
 
+const areaList = {
+    0: ['推荐', true, ]
+}
+
+
+
 class Header extends React.Component {
   render() {
     return (
