@@ -1,34 +1,38 @@
+import React from 'react';
 import './App.css';
 import Header from './components/header';
 import Blogs from './components/blogs';
-import Sidebar from './components/sidebar';
+// import Sidebar from './components/sidebar';
 
-// function renderHeader() {
-//     return <Header />;
-// }
 
-// function renderBlogs() {
-//   return <Blogs />;
-// }
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category_id: 0,
+      sortedBy: 0,
+    };
+    this.sort = ['hot', "new"];
+    this.changeCtgId = this.changeCtgId.bind(this);
+    this.changeSortedBy = this.changeSortedBy.bind(this);
+  }
 
-// function renderSidebar() {
-//   return <Sidebar />;
-// }
+  changeCtgId(id) {
+    this.setState({category_id : id});
+  }
 
-const listItems = ['最新', '热门', '历史'];
-let items = listItems.map(x => (<li>{x}</li>));
+  changeSortedBy(id) {
+    this.setState({sortedBy : this.sort[parseInt(id)]});
+  }
 
-function App() {
-  return (
-    // <div className="App">
-    //     { renderHeader() };
-    //     <div className="Content">
-    //       { renderBlogs() };
-    //       { renderSidebar() };
-    //     </div>
-    // </div>
-    <ul>{items}</ul>
-  );
+  render() {
+    return (
+      <div className="App">
+        <Header changeCtgId={this.changeCtgId} changeSortedBy={this.changeSortedBy}></Header>
+        <Blogs categoryId={this.state.category_id} sortedBy={this.state.sortedBy}></Blogs>
+      </div>
+    );
+  }
 }
 
 export default App;
