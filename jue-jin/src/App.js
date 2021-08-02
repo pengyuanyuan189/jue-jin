@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/header';
 import Blogs from './components/blogs';
+import Blog from './components/blog';
 // import Sidebar from './components/sidebar';
 
 
@@ -30,6 +31,7 @@ class App extends React.Component {
       <div className="App">
         <Header changeCtgId={this.changeCtgId} changeSortedBy={this.changeSortedBy}></Header>
         <Blogs categoryId={this.state.category_id} sortedBy={this.state.sortedBy}></Blogs>
+        <Blog></Blog>
       </div>
     );
   }

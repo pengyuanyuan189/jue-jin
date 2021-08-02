@@ -1,29 +1,17 @@
 import React from "react";
+import parseTime from "../../utils/parseTime";
 
 class BlogItem extends React.Component {
   constructor(props) {
     super(props);
     this.article = {};
-    this.parseTime = this.parseTime.bind(this);
     this.setArticle = this.setArticle.bind(this);
   }
 
-  parseTime(time) {
-    let date = new Date().getTime();
-    let interval = date - time;
-    if(interval >= 3600){
-      // 字符串显示有问题
-      return `${interval / 3600}小时前`;
-    }else if(interval >= 60){
-      return `${interval / 60}分钟前`;
-    }else{
-      return `${interval}秒前`;
-    }
-  }
-
+  
   setArticle(data) {
     this.article.author = data.author_user_info.user_name;
-    this.article.postTime = this.parseTime(data.article_info.ctime);
+    this.article.postTime = parseTime(data.article_info.ctime);
     this.article.keywords = data.category_info.first_category_name + " · " + data.category_info.second_category_name;
     this.article.title = data.article_info.title;
     this.article.content = data.article_info.brief_content;
@@ -47,7 +35,7 @@ class BlogItem extends React.Component {
           <div className="itemContent">
             <h3 className="title">{this.article.title}</h3>
             <p className="content">{this.article.content}</p>
-            <img className="artPic" src={this.article.artPic}></img>
+            <img className="artPic" src={this.article.artPic} alt="coverImage"></img>
           </div>
           <p className="itemFooter">
             <span className="scanNum">

@@ -21,7 +21,7 @@ class Blogs extends React.Component {
 
   itemRender(categoryId) {
     this.drawArticleList(categoryId);
-    return this.articleList.map(x => (<li className="blogList"><BlogItem article={x}></BlogItem></li>));
+    return this.articleList.map(x => (<li className="blogList" key={x.article_id}><BlogItem article={x}></BlogItem></li>));
   }
 
   drawArticleList(categoryId) {

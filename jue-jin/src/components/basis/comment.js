@@ -1,38 +1,15 @@
 import React from "react";
-import { getArticleById, getCommentsByArticleId } from "../utils/fake-api/index";
+import parseTime from "../../utils/parseTime";
 
-class Blog extends React.Component {
+class Comment extends React.Component {
   constructor(props) {
     super(props);
-    this.concatTime = this.concatTime.bind(this);
     this.parseData = this.parseData.bind(this);
-    this.state = {
-      article : {
-        author : "",
-        author_avatar : "",
-        author_level : "",
-        createTime : "",
-        scanNum : "",
-        artPic : "",
-        title : "",
-        content : "",
-      },
-      comment: {}
-    }
-  }
-
-  concatTime(time) {
-    let date = new Date(parseInt(time));
-    return {
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      day: date.getDate(),
-    };
   }
 
   parseData(data) {
     let article = {};
-    const {year, month, day} = this.concatTime(data.article_info.ctime);
+    const {year, month, day} = this.parseTime(data.article_info.ctime);
     const userLevel = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/f8d51984638784aff27209d38b6cd3bf.svg";
     article.author = data.author_user_info.user_name;
     article.author_avatar = data.author_user_info.avatar_large;
@@ -42,44 +19,10 @@ class Blog extends React.Component {
     article.artPic = data.article_info.cover_image;
     article.title = data.article_info.title;
     article.content = data.article_content;
-    
-    let content = document.getElementsByClassName("content")[0];
-    content.innerHTML = article.content;
 
     this.setState(() => ({article : article}));
-  }
-
-  componentDidMount(){
-    // 正式版代码
-    // 获取文章内容
-    // getArticleById(this.props.articleId).then(data => {
-    //   console.log(data);
-    //   this.parseData(data.data.article);
-    // }).catch(e => {
-    //   console.log(e);
-    // });
-
-    getArticleById("6970840573624680484").then(data => {
-      if(data.data.code !== 400){
-        this.parseData(data.data.article);
-      }else{
-
-      }
-    }).catch(e => {
-      console.log(e);
-    });
-
-    // 获取文章评论
-    getCommentsByArticleId("6970840573624680484").then(data => {
-      if(data.data.code !== 400){
-        console.log(data);
-        this.setState(() => ({comment : data}));
-      }else{
-
-      }
-    }).catch(e => {
-      console.log(e);
-    });
+    let content = document.getElementsByClassName("content")[0];
+    content.innerHTML = this.state.article.content;
   }
 
   render () {
@@ -104,4 +47,4 @@ class Blog extends React.Component {
   }
 }
 
-export default Blog;
+export default Comment;
