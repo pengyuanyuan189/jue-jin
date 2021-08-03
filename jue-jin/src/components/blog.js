@@ -1,5 +1,6 @@
 import React from "react";
 import { getArticleById, getCommentsByArticleId } from "../utils/fake-api/index";
+import Comments from "./basis/comments";
 
 class Blog extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Blog extends React.Component {
         title : "",
         content : "",
       },
-      comment: {}
+      comments: []
     }
   }
 
@@ -72,8 +73,7 @@ class Blog extends React.Component {
     // 获取文章评论
     getCommentsByArticleId("6970840573624680484").then(data => {
       if(data.data.code !== 400){
-        console.log(data);
-        this.setState(() => ({comment : data}));
+        this.setState(() => ({comments : data.data.comments}));
       }else{
 
       }
@@ -99,6 +99,7 @@ class Blog extends React.Component {
           </div>
           <img className="coverImage" src={this.state.article.artPic} alt="文章封面"></img>
           <p className="content"></p>
+          {this.state.comments.length ? <Comments comments={this.state.comments}></Comments> : null}
         </div>
     );
   }
