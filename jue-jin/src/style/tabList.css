@@ -1,0 +1,21 @@
+ul.category13{
+  font-size: 1.16rem;
+  color: #71777c;
+  height: 3.833rem;
+  /* border: 1px solid #71777c; */
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+}
+
+ul.category13 li {
+  padding: 0rem 1rem;
+  line-height: 3.833rem;
+  height: 100%;
+}
+
+ul.category13 li:hover {
+  color: #007fff;
+}
+
+.activated{
+  color: #007fff;
+}

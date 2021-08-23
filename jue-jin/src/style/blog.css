@@ -1,0 +1,74 @@
+div.blog{
+  width: 960px;
+  margin: 0 auto 3rem;
+  padding: 2rem 1.5rem 1.5rem;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* 头部样式 */
+div.artcHeader{
+  margin-bottom: 2rem;
+}
+
+div.artcHeader::after{
+  display: block;
+  content: "";
+  clear: both;
+}
+
+div.artcHeader img.userAvatar{
+  width: 3.333rem;
+  height: 3.333rem;
+  margin-right: 1rem;
+  float: left;
+  border-radius: 50%;
+}
+
+div.artcHeader p.authorMsg span.authorName{
+  margin-right: 1rem;
+}
+
+div.artcHeader button{
+  margin: 0 0 0 auto;
+  padding: 0;
+  width: 55px;
+  height: 26px;
+  font-size: 13px;
+  border: 1px solid #6cbd45;
+  color: #6cbd45;
+  background-color: #fff;
+  float: right;
+}
+
+div.artcHeader p{
+  width: 100%;
+}
+
+
+div.artcHeader span.authorName{
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+div.artcHeader p.extraMsg{
+  font-size: 1.1rem;
+  color: #909090;
+  margin-top: 1rem;
+}
+
+/* 文章主体部分的样式 */
+div.blog img.coverImage{
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+/* div.blog p.content{
+  text-align: left;
+} */
+
+div.blog p.content p{
+  text-indent: 2em;
+}

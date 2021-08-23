@@ -40,21 +40,21 @@ class Header extends React.Component {
 
   changeFisrtCtg(id){
     this.setState({first_ctg : id});
-    this.setState(() => ({second_categories : Second_categories[id].children}));
-  }
-
-  /**
-   * 功能：根据分类id和排序方式获取文章列表
-   */
-  getArticles() {
-
+    this.setState(() => ({second_categories : Second_categories[id].children || []}));
   }
 
   render() {
     return (
         <div className="Header">
             <Tablist contents={first_categories} changeCtgId={this.props.changeCtgId} changeFisrtCtg={this.changeFisrtCtg} tabNum="1"></Tablist>
-            <Tab2 contents={this.state.second_categories || []} changeCtgId={this.props.changeCtgId} tabNum="2"></Tab2>
+            
+            {
+              (this.state.second_categories.length) 
+              ?
+              <Tab2 contents={this.state.second_categories} changeCtgId={this.props.changeCtgId} tabNum="2"></Tab2>
+              :
+              ""
+            }
             <Tablist contents={third_tab} changeSortedBy={this.props.changeSortedBy} tabNum="3"></Tablist>
         </div>
       );

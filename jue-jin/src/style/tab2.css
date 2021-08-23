@@ -1,0 +1,25 @@
+ul.category2 {
+  font-size: 1.16rem;
+  color: #71777c;
+  background-color: #f4f5f5;
+  height: 3.833rem;
+}
+
+ul.category2 li {
+  padding: 0rem 1rem;
+  line-height: 2rem;
+  height: 2rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  margin: 1rem;
+}
+
+ul.category2 li:hover {
+  background-color: #007fff;
+  color: #ffffff;
+}
+
+.activatedCate2{
+  background-color: #007fff !important;
+  color: #ffffff;
+}

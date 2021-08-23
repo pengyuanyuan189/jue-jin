@@ -1,6 +1,9 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 import { getArticleById, getCommentsByArticleId } from "../utils/fake-api/index";
 import Comments from "./basis/comments";
+import userLevel from '../utils/userLevel';
+import "../style/blog.css"
 
 class Blog extends React.Component {
   constructor(props) {
@@ -10,7 +13,7 @@ class Blog extends React.Component {
     this.state = {
       article : {
         author : "",
-        author_avatar : "",
+        author_avatar : "https://sf1-ttcdn-tos.pstatp.com/img/mosaic-legacy/3795/3044413937~300x300.image",
         author_level : "",
         createTime : "",
         scanNum : "",
@@ -19,7 +22,7 @@ class Blog extends React.Component {
         content : "",
       },
       comments: []
-    }
+    };
   }
 
   concatTime(time) {
@@ -34,10 +37,9 @@ class Blog extends React.Component {
   parseData(data) {
     let article = {};
     const {year, month, day} = this.concatTime(data.article_info.ctime);
-    const userLevel = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/f8d51984638784aff27209d38b6cd3bf.svg";
     article.author = data.author_user_info.user_name;
     article.author_avatar = data.author_user_info.avatar_large;
-    article.author_level = userLevel;
+    article.author_level = data.author_user_info.level;
     article.createTime = `${year}年${month}月${day}日`;
     article.scanNum = data.article_info.digg_count;
     article.artPic = data.article_info.cover_image;
@@ -53,25 +55,14 @@ class Blog extends React.Component {
   componentDidMount(){
     // 正式版代码
     // 获取文章内容
-    // getArticleById(this.props.articleId).then(data => {
-    //   console.log(data);
-    //   this.parseData(data.data.article);
-    // }).catch(e => {
-    //   console.log(e);
-    // });
-
-    getArticleById("6970840573624680484").then(data => {
-      if(data.data.code !== 400){
-        this.parseData(data.data.article);
-      }else{
-
-      }
+    getArticleById(this.props.match.params.id).then(data => {
+      this.parseData(data.data.article);
     }).catch(e => {
       console.log(e);
     });
 
-    // 获取文章评论
-    getCommentsByArticleId("6970840573624680484").then(data => {
+    // 获取评论内容
+    getCommentsByArticleId(this.props.match.params.id).then(data => {
       if(data.data.code !== 400){
         this.setState(() => ({comments : data.data.comments}));
       }else{
@@ -89,15 +80,15 @@ class Blog extends React.Component {
             <img className="userAvatar" src={this.state.article.author_avatar} alt="用户头像"></img>
             <p className="authorMsg">
               <span className="authorName">{this.state.article.author}</span>
-              <img className="userLevel" src={this.state.article.author_level} alt="用户级别"></img>
-            </p>
-            <p className="extraMsg">
-              <span className="createTime">{this.state.article.createTime}</span>
-              <span className="scanNum">{this.state.article.scanNum}</span>
+              {this.state.article.author_level ? <img className="userLevel" src={userLevel[this.state.article.author_level]} alt="用户级别"></img> : ""}
             </p>
             <button className="followme">关注</button>
+            <p className="extraMsg">
+              <span className="createTime">{this.state.article.createTime}</span>
+              <span className="scanNum">阅读{this.state.article.scanNum}</span>
+            </p>
           </div>
-          <img className="coverImage" src={this.state.article.artPic} alt="文章封面"></img>
+          {this.state.article.artPic ? <img className="coverImage" src={this.state.article.artPic} alt="文章封面"></img> : ""}
           <p className="content"></p>
           {this.state.comments.length ? <Comments comments={this.state.comments}></Comments> : null}
         </div>
@@ -105,4 +96,4 @@ class Blog extends React.Component {
   }
 }
 
-export default Blog;
+export default withRouter(Blog);

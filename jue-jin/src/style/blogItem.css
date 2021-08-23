@@ -1,0 +1,51 @@
+ul.Blogs li.blogList {
+  width: 960px;
+  padding: 12px 20px 0;
+}
+
+ul.Blogs div.BlogItem {
+  text-align: left;
+  color: #71777c;
+}
+
+ul.Blogs div.BlogItem ul.itemHeader {
+  padding: 0px;
+}
+
+ul.Blogs div.BlogItem ul.itemHeader li {
+  padding: 0px 8px;
+}
+
+ul.Blogs div.BlogItem ul.itemHeader li.seperator {
+  padding: 0px;
+}
+
+ul.Blogs div.BlogItem div.itemContent {
+  border-bottom: 1px solid #d0d4d4;
+  box-shadow: 0 0px 1px 0 rgb(0 0 0 / 5%);
+}
+
+ul.Blogs div.BlogItem div.itemContent div.leftContent p.content {
+  /* 设置宽度以及文字溢出处理 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+ul.Blogs div.BlogItem div.itemContent img.artPic{
+  width: 120px;
+  height: 80px;
+  margin-left: 2rem;
+  float: right;
+}
+
+ul.Blogs div.BlogItem div.itemContent div.leftContent h3.title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #1d2129;
+}
+
+ul.Blogs div.BlogItem div.itemContent div.leftContent p  span {
+  margin-right: 1rem;
+}

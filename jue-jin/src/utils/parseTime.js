@@ -2,7 +2,7 @@ export default function parseTime(time) {
   let date = new Date().getTime();
   let interval = date - time;
   if(interval >= 3600 * 24 * 30){
-    return `一个月前`;
+    return `1个月前`;
   }else if(interval >= 3600 * 24) {
     return `${Math.round(interval / (3600 * 24))}天前`;
   }else if(interval >= 3600) {
